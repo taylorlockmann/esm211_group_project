@@ -1,0 +1,49 @@
+---
+title: "ESM211 Group Project Data Viz"
+author: "Taylor Lockmann"
+date: "2/10/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Setup
+
+
+```{r}
+# Read in libraries
+library(tidyverse)
+library(here)
+```
+
+```{r}
+# Read in the data to use
+squid_fishing_data <- read.csv(here("data", "fishing_effort_per_block.csv"))
+```
+
+
+## Exploratory Data Viz
+
+### Lbs vs # Receipts
+
+```{r}
+ggplot(data = squid_fishing_data, aes(x = catch_receipts, y = catch_lbs))+
+  geom_point()+
+  theme_bw()+
+  labs(title = "Pounds of Squid Caught vs Number of Receipts Reported",
+       subtitle = "Including zero receipts or lbs caught")
+```
+
+
+### Fishing effort over time
+
+```{r}
+ggplot(data = squid_fishing_data, aes(x = landing_month, y = catch_per_receipts, color = landing_year))+
+  geom_point()+
+  geom_line()+
+  theme_bw()+
+  labs(title = "Pounds of Squid Caught Per Landing Receipt")
+```
+
