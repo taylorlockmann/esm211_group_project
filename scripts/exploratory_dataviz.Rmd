@@ -40,10 +40,11 @@ ggplot(data = squid_fishing_data, aes(x = catch_receipts, y = catch_lbs))+
 ### Fishing effort over time
 
 ```{r}
-ggplot(data = squid_fishing_data, aes(x = landing_month, y = catch_per_receipts, color = landing_year))+
-  geom_point()+
-  geom_line()+
+ggplot(data = squid_fishing_data)+
+  geom_point(aes(x = landing_month, y = catch_per_receipts, color = landing_year))+
   theme_bw()+
   labs(title = "Pounds of Squid Caught Per Landing Receipt")
 ```
 
+# 2/24 notes
+# Next steps: consolidate catch per unit effort into one value per year. Then look at trends across time, especially identifying El Nino years.
