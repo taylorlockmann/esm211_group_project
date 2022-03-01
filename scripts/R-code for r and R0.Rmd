@@ -7,24 +7,59 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(popbio)
 ```
 
-## R Markdown
+Calculate R0 with p values
+```{r}
+my_vec<-c()
+for(i in seq(from = 0.1, to = 1, by=0.01)) {
+  R0=3844*(i)^5
+  my_vec <- c(my_vec, R0)
+  }
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+my_vec
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+Calculate R0 with p values
+```{r}
+my_vec<-c()
+for(i in 0.1:length(seq(from = 0.1, to = 1, by=0.01))) {
+  R0=3844*(i)^5
+  my_vec <- c(my_vec, R0)
+  }
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+my_vec
+
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Build Age Structure Matrix Model
+
+```{r}
+#Define the ages 
+stages = c("0", "1")
+
+
+#Define the matrix
+A = matrix(c(0,3844,0.5,0),nrow=2, byrow=T,dimnames=list(stages,stages))
+
+#check the matrix
+A
+
+#Define an initial population structure
+N0=c(20,20)
+
+#Project the matrix population model K time steps
+K<-50
+projA=pop.projection(A,N0,K)
+
+#the population growth rate (lambda). Above 1, population growth. Below 1, populaiton decline.
+projA$lambda
+
+#Plot the population size projection
+plot(projA$pop.size,pch=16, type='b',ylab="Population Size",xlab="Time Step")
+```
+
