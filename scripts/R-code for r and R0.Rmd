@@ -33,7 +33,7 @@ for(i in 0.1:length(seq(from = 0.1, to = 1, by=0.01))) {
 
 my_vec
 
-
+plot(my_vec, pch = 16, ylab = "R0", xlab = "p")
 ```
 
 Build Age Structure Matrix Model
