@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Read in libraries
 library(tidyverse)
 library(here)
+library(lubridate)
 ```
 
 ```{r}
@@ -48,3 +49,41 @@ ggplot(data = squid_fishing_data)+
 
 # 2/24 notes
 # Next steps: consolidate catch per unit effort into one value per year. Then look at trends across time, especially identifying El Nino years.
+
+```{r}
+# Wrangle some more data
+squid_fishing_no_na <- squid_fishing_data %>% 
+  drop_na() %>% # Drop NAs from our dataframe
+  group_by(landing_year, landing_month) %>% # Group data according to month and year
+  summarise_at(vars(catch_per_receipts),
+               list(avg_cpu = mean)) # Summarize average of catch_per_receipts
+
+squid_fishing_no_na$landing_year <- as.factor(squid_fishing_no_na$landing_year)
+```
+
+
+```{r}
+# Make a graph of CPU
+ggplot(data = squid_fishing_no_na)+
+  geom_point(aes(x = landing_month, y = avg_cpu, color = landing_year))+
+  geom_line(aes(x = landing_month, y = avg_cpu, color = landing_year))+
+  theme_bw()
+
+  
+```
+
+
+```{r}
+# Make a graph with consecutive years
+
+squid_tibble<- squid_fishing_no_na %>% 
+  mutate(date = make_date(year=landing_year, month=landing_month))
+
+ggplot(data = squid_tibble)+
+  geom_point(aes(x = date, y = avg_cpu))+
+  geom_line(aes(x = date, y = avg_cpu))+
+  theme_bw()
+```
+ 
+
+
