@@ -92,6 +92,7 @@ ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
   annotate("text", x = 0.75, y = 0.05, label = "p = 0.7", col = "red")
 ```
 
+Need to calculate the p value where R0 is 1...
 
 Build Age Structure Matrix Model
 
