@@ -76,6 +76,22 @@ ggplot(p_lessthan35, aes(x = pvalue, y = R0_calculated)) +
   annotate("text", x = 0.1, y = 1.75, label = "R0 = 1", col = "red")
 ```
 
+Try putting it on a log scale or doing a break in the graph to show 0.2 and 0.4-0.7 legibly in the same plot.
+
+```{r}
+#Trying the log scale y-axis
+ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
+  geom_line() + theme_minimal() +
+  xlab("p-value") + ylab("R0") +
+  geom_hline(yintercept = 1, col = "red") +
+  annotate("text", x = 0.1, y = 1.75, label = "R0 = 1", col = "red") +
+  scale_y_log10() +
+  geom_vline(xintercept = 0.4, col = "red") +
+  geom_vline(xintercept = 0.7, col = "red") +
+  annotate("text", x = 0.35, y = 0.05, label = "p = 0.4", col = "red") +
+  annotate("text", x = 0.75, y = 0.05, label = "p = 0.7", col = "red")
+```
+
 
 Build Age Structure Matrix Model
 
