@@ -41,11 +41,10 @@ R0_data <- data.frame(R0_calculated, pvalue)
 ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
   geom_line() +
   theme_minimal() +
-  xlab("p-value") +
-  ylab("R0")
+  xlab("\np-value") +
+  ylab("R0\n")
 
-#This is my exploratory plot of R0
-#plot(my_vec, pch = 16, ylab = "R0", xlab = "p")
+
 ```
 
 ```{r}
@@ -72,7 +71,7 @@ p_lessthan35 <- R0_data %>%
 ggplot(p_lessthan35, aes(x = pvalue, y = R0_calculated)) +
   geom_line() + theme_minimal() +
   xlab("p-value") + ylab("R0") +
-  geom_hline(yintercept = 1, col = "red") +
+  geom_hline(yintercept = 1, col = "red", linetype = "dashed") +
   annotate("text", x = 0.1, y = 1.75, label = "R0 = 1", col = "red")
 ```
 
@@ -80,19 +79,32 @@ Try putting it on a log scale or doing a break in the graph to show 0.2 and 0.4-
 
 ```{r}
 #Trying the log scale y-axis
+options(scipen = 999)
 ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
   geom_line() + theme_minimal() +
-  xlab("p-value") + ylab("R0") +
-  geom_hline(yintercept = 1, col = "red") +
+  xlab("\np-value") + ylab("R0\n") +
+  geom_hline(yintercept = 1, col = "red", linetype = "dashed") +
   annotate("text", x = 0.1, y = 1.75, label = "R0 = 1", col = "red") +
   scale_y_log10() +
-  geom_vline(xintercept = 0.4, col = "red") +
-  geom_vline(xintercept = 0.7, col = "red") +
+  geom_vline(xintercept = 0.4, col = "red", linetype = "twodash") +
+  geom_vline(xintercept = 0.7, col = "red", linetype = "twodash") +
   annotate("text", x = 0.35, y = 0.05, label = "p = 0.4", col = "red") +
   annotate("text", x = 0.75, y = 0.05, label = "p = 0.7", col = "red")
 ```
 
 Need to calculate the p value where R0 is 1...
+
+```{r}
+#R0 = 3844p^5
+p <- (1/3844)^(1/5)
+p
+```
+
+```{r}
+
+```
+
+
 
 Build Age Structure Matrix Model
 
