@@ -42,9 +42,15 @@ ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
   geom_line() +
   theme_minimal() +
   xlab("\np-value") +
-  ylab("R0\n")
+  ylab("R0\n") + ggtitle("R0 vs. p")
 
-
+png(file = 'R0vsp.png')
+ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
+  geom_line() +
+  theme_minimal() +
+  xlab("\np-value") +
+  ylab("R0\n") + ggtitle("R0 vs. p")
+dev.off()
 ```
 
 ```{r}
@@ -82,14 +88,30 @@ Try putting it on a log scale or doing a break in the graph to show 0.2 and 0.4-
 options(scipen = 999)
 ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
   geom_line() + theme_minimal() +
-  xlab("\np-value") + ylab("R0\n") +
+  xlab("\np-value") + ylab("log(R0)\n") +
   geom_hline(yintercept = 1, col = "red", linetype = "dashed") +
   annotate("text", x = 0.1, y = 1.75, label = "R0 = 1", col = "red") +
   scale_y_log10() +
   geom_vline(xintercept = 0.4, col = "red", linetype = "twodash") +
   geom_vline(xintercept = 0.7, col = "red", linetype = "twodash") +
   annotate("text", x = 0.35, y = 0.05, label = "p = 0.4", col = "red") +
-  annotate("text", x = 0.75, y = 0.05, label = "p = 0.7", col = "red")
+  annotate("text", x = 0.75, y = 0.05, label = "p = 0.7", col = "red") +
+  ggtitle("log(R0) vs. p")
+
+png(file = 'logR0vsp.png')
+options(scipen = 999)
+ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
+  geom_line() + theme_minimal() +
+  xlab("\np-value") + ylab("log(R0)\n") +
+  geom_hline(yintercept = 1, col = "red", linetype = "dashed") +
+  annotate("text", x = 0.1, y = 1.75, label = "R0 = 1", col = "red") +
+  scale_y_log10() +
+  geom_vline(xintercept = 0.4, col = "red", linetype = "twodash") +
+  geom_vline(xintercept = 0.7, col = "red", linetype = "twodash") +
+  annotate("text", x = 0.35, y = 0.05, label = "p = 0.4", col = "red") +
+  annotate("text", x = 0.75, y = 0.05, label = "p = 0.7", col = "red") +
+  ggtitle("log(R0) vs. p")
+dev.off()
 ```
 
 Need to calculate the p value where R0 is 1...
