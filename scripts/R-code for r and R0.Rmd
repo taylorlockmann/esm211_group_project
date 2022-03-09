@@ -42,14 +42,20 @@ ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
   geom_line() +
   theme_classic() +
   xlab("\np-value") +
-  ylab("R0\n") + ggtitle("R0 vs. p")
+  ylab("R0\n") + ggtitle("R0 vs. p") +
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        plot.title = element_text(size = 15))
 
 png(file = 'R0vsp.png')
 ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
   geom_line() +
   theme_classic() +
   xlab("\np-value") +
-  ylab("R0\n") + ggtitle("R0 vs. p")
+  ylab("R0\n") + ggtitle("R0 vs. p") +
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        plot.title = element_text(size = 15))
 dev.off()
 ```
 
@@ -96,7 +102,10 @@ ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
   geom_vline(xintercept = 0.7, col = "red", linetype = "twodash") +
   annotate("text", x = 0.35, y = 0.05, label = "p = 0.4", col = "red") +
   annotate("text", x = 0.75, y = 0.05, label = "p = 0.7", col = "red") +
-  ggtitle("log(R0) vs. p")
+  ggtitle("log(R0) vs. p") +
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        plot.title = element_text(size = 15))
 
 png(file = 'logR0vsp.png')
 options(scipen = 999)
@@ -110,8 +119,13 @@ ggplot(R0_data, aes(x = pvalue, y = R0_calculated)) +
   geom_vline(xintercept = 0.7, col = "red", linetype = "twodash") +
   annotate("text", x = 0.35, y = 0.05, label = "p = 0.4", col = "red") +
   annotate("text", x = 0.75, y = 0.05, label = "p = 0.7", col = "red") +
-  ggtitle("log(R0) vs. p")
+  ggtitle("log(R0) vs. p") +
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        plot.title = element_text(size = 15))
 dev.off()
+
+
 ```
 
 Need to calculate the p value where R0 is 1...
